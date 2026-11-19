@@ -32,8 +32,8 @@ Mỗi lệnh `lab10.eval` và `lab10.grade` tự ghi một dòng vào `runs/jour
 |---|---|---|---|---|---|---|---|---|
 | 1 | `R-S6-prepared-20261119-165101-b504cd` | S6 · prepared | nhận thẻ đã bốc, chưa sửa thêm (đúng cổng vòng 1 đã chốt) | 0.3333 | 0.3333 | 270000đ · 25 · 0 | 0.0 | Cổng vòng 1 giảm lỗi hãng oan từ 40 xuống 25, nhưng chưa xử lý được đơn tách kiện nên vẫn hỏng `S6-01`, `S6-02`. |
 | 2 | `R-S6-after-20261119-170331-b58785` | S6 · after | Thêm cổng S6 trong `guards.py` (escalate đơn nhiều kiện trễ mơ hồ; modify đúng kiện/hãng trễ; deny vượt trần lỗi/hãng/ngày) | 1.0 | 1.0 | 0đ · 0 · 0 | 0.1667 | Xử lý sạch 100% gói sự cố S6 (`wrongful_refund_vnd = 0`, `wrongful_carrier_faults = 0`). |
-| 3 | | Sx · after | | | | | | |
-| 4 | | base · after | (kiểm không regression) | | | | | |
+| 3 | `R-S6-after-20261119-170901-005ba4` | S6 · after | Thêm monitor `multi_parcel_guard_rate` trong `lab10/monitors.py` | 1.0 | 1.0 | 0đ · 0 · 0 | 0.1667 | Monitor sáng đèn trên S6 (`0.0 -> 0.666667`), mọi chỉ số đạt 100%. |
+| 4 | `R-S6-grade-20261119-173059-005ba4` | base · after | (kiểm không regression sau khi sửa S6) | 1.0 | 1.0 | 0đ · 0 · 0 | 0.2273 | Không có ca mới hỏng trên bộ nền (`0.9909 -> 1.0`). |
 
 ---
 
