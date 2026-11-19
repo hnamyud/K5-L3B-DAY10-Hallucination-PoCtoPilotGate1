@@ -45,8 +45,8 @@ Commit sau hạn chót không được tính; team chấm lấy commit cuối c�
 
 - [x] Repo của bàn đúng tên `K5-<L3A|L3B>-DAY10-<TenNhom>-PoCtoPilotGate1` và ở chế độ **Public**.
 - [ ] `TEAM.md` có đủ họ tên, MSSV, vai của mọi thành viên và mục `## HoVaTen-MSSV` của từng người.
-- [ ] Tiêu chí đã ký, commit và push **trước** lần đánh giá đầu tiên.
-- [ ] Đã chốt cổng vòng 1 (lệnh 5) trước phút 115.
+- [x] Tiêu chí đã ký, commit và push **trước** lần đánh giá đầu tiên.
+- [x] Đã chốt cổng vòng 1 (lệnh 5) trước phút 115.
 - [ ] Ba phiếu A, B, C đã điền **mọi mục** (A1–A5, B0–B8, C0–C12); dòng `Thẻ đã bốc:` đúng số thẻ. Lệnh 7 báo tên mục còn nguyên mẫu. Bàn bốc thẻ S4 không cần điền C3.
 - [ ] `submission/submission.json` đủ trường, `members` có MSSV.
 - [ ] Lệnh 7 in `ĐỦ THÀNH PHẦN` trên đúng code và config cuối cùng.
