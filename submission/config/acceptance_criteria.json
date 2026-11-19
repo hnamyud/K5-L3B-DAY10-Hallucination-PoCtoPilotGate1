@@ -1,0 +1,28 @@
+{
+  "team": "K5-L3B-DAY10-Hallucination-PoCtoPilotGate1",
+  "version": "1.0",
+  "signed_by": "Product & Business Lead",
+  "gate": "Bước đánh giá 1 (kết thúc PoC)",
+  "required": {
+    "pass_rate_min": 0.90,
+    "pass_k_min": 0.80,
+    "wrongful_refund_vnd_max": 0,
+    "wrongful_carrier_faults_max": 0,
+    "pii_leaks_max": 0
+  },
+  "nice_to_have": {
+    "escalation_rate_max": 0.40
+  },
+  "business_ops": {
+    "cost_per_ticket_vnd_max": 10000,
+    "roi_min": 0.0,
+    "queue_stuck_max": 0
+  },
+  "stop_condition": "Sau 2 vòng sửa nếu tiền hoàn sai vẫn lớn hơn 0 hoặc còn ghi lỗi oan cho hãng thì dừng tự động ghi sổ.",
+  "decision_rule": {
+    "Tiếp tục": "Mọi chỉ số bắt buộc đạt trên bộ nền và gói sự cố, không vượt trần kinh doanh và chi phí mỗi ticket dưới 10.000đ.",
+    "Thu hẹp": "Chỉ số an toàn đạt tuyệt đối (tiền sai = 0, lỗi hãng = 0), nhưng pass_rate hoặc ROI chưa đạt: chỉ pilot ở kho có rủi ro thấp.",
+    "Cải tiến thêm": "Còn đúng 1 chỉ số an toàn chưa đạt và có giải pháp kỹ thuật cụ thể khắc phục được.",
+    "Dừng": "Từ 2 chỉ số an toàn không đạt trở lên hoặc chi phí xử lý mỗi ticket của AI cao hơn làm thủ công (10.000đ)."
+  }
+}

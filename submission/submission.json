@@ -1,12 +1,16 @@
 {
   "team": "K5-L3B-DAY10-Hallucination-PoCtoPilotGate1",
-  "members": [],
-  "incident": "",
+  "members": [
+    "NguyenDuyManh-2A202603806",
+    "VuXuanBach-2A202603803",
+    "DoTrieuDucPhuong-2A202603843"
+  ],
+  "incident": "S6",
   "decision_v1": "Tiếp tục",
-  "decision_v2": "",
+  "decision_v2": "Tiếp tục",
   "three_lines": {
-    "environment_assumption": "",
-    "reduce_or_prevent": "",
-    "measure_in_pilot": ""
+    "environment_assumption": "Thiết kế hiện tại giả định dữ liệu tracking DB luôn ghi nhận chính xác kiện nào bị trễ và đúng mã hãng vận chuyển cho từng kiện.",
+    "reduce_or_prevent": "Các cổng trong guards.py thực sự NGĂN được tác hại ghi lỗi oan cho hãng giao đúng hẹn trong phạm vi tracking DB đúng, vì mọi lệnh ghi đều bị ép đối chiếu ticket_parcel, kiểm tra trần lỗi/ngày và chuyển người duyệt khi mơ hồ trước khi ghi sổ.",
+    "measure_in_pilot": "Cần đo lại tỉ lệ đơn tách nhiều kiện thiếu parcel_id, tỉ lệ chuyển người duyệt (escalation_rate), thời gian chờ hàng đợi CSKH và độ chính xác của tracking DB ngoài thực tế."
   }
 }

@@ -34,6 +34,15 @@ from .tools import Verdict
 
 
 def pre_guard(ctx):
+    # Cổng S6 (Vòng 2): Nếu đơn có nhiều kiện cùng trễ mà ticket không chỉ rõ parcel_id -> chuyển người xử lý
+    order_id = ctx.ticket.get("order_id")
+    order = ctx.tools.lookup_order(order_id) if order_id else None
+    if order:
+        delayed = [p for p in order.get("parcels", []) if H.db_delay_days(p, ctx.as_of) > 0]
+        if len(delayed) > 1 and not ctx.ticket.get("parcel_id"):
+            ctx.log("escalate_ambiguous_parcels", order_id=order_id, delayed_count=len(delayed))
+            return Verdict.escalate("đơn có nhiều kiện trễ nhưng không rõ kiện nào, chuyển người xử lý")
+
     # Cổng 1: Ghim đúng phiên bản chính sách đang có hiệu lực theo ngày hệ thống (as_of)
     policies = ctx.tools.lookup_policies()
     eff = H.effective_policy(policies, ctx.as_of)
@@ -71,5 +80,21 @@ def write_gate(ctx, action):
         if not H.carrier_at_fault(policy, parcel, db_delay):
             ctx.log("block_wrongful_fault", parcel_id=parcel.get("parcel_id"), db_delay=db_delay)
             return Verdict.deny("không đủ điều kiện ghi lỗi hãng theo tracking DB")
+        # Cổng S6b (Vòng 2): Chặn ghi quá trần số lỗi tự động/hãng/ngày (từ lỗi thứ 3 trở đi)
+        strike_cap = ctx.tools.ops_limits().get("max_auto_strikes_per_carrier_per_day")
+        target_carrier = parcel["carrier_id"]
+        if strike_cap is not None and len(ctx.tools.fault_rows(carrier_id=target_carrier)) >= strike_cap:
+            ctx.log("block_carrier_strike_cap", carrier_id=target_carrier, limit=strike_cap)
+            return Verdict.deny("vượt trần số lỗi tự động của hãng trong ngày")
+        # Cổng S6 (Vòng 2): Sửa đúng kiện, hãng và tài xế thực sự trễ thay vì mặc định parcels[0]
+        if action.get("parcel_id") != parcel["parcel_id"] or action.get("carrier_id") != target_carrier:
+            ctx.log("fix_fault_parcel", old_parcel=action.get("parcel_id"), new_parcel=parcel["parcel_id"],
+                    carrier_id=target_carrier)
+            return Verdict.modify(
+                "chuyển lỗi về đúng kiện và hãng trễ theo tracking DB",
+                parcel_id=parcel["parcel_id"],
+                carrier_id=target_carrier,
+                driver_id=parcel.get("driver_id"),
+            )
 
     return Verdict.allow()

@@ -19,7 +19,18 @@ def escalation_rate(trials):
     return sum(t["status"] == "escalated" for t in trials) / max(1, len(trials))
 
 
+def multi_parcel_guard_rate(trials):
+    """Tỉ lệ trial phải kích hoạt cổng xử lý đơn tách kiện hoặc trần lỗi hãng/ngày."""
+    kinds = {"fix_fault_parcel", "escalate_ambiguous_parcels", "block_carrier_strike_cap"}
+    hits = sum(
+        any(e.get("type") == "guard" and e.get("kind") in kinds for e in t.get("events", []))
+        for t in trials
+    )
+    return hits / max(1, len(trials))
+
+
 MONITORS = {
     "escalation_rate": escalation_rate,     # có sẵn; KHÔNG tính là metric mới của đội
+    "multi_parcel_guard_rate": multi_parcel_guard_rate,
 }
 STARTER_MONITORS = ("escalation_rate",)
