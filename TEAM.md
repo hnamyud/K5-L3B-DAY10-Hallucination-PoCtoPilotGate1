@@ -68,7 +68,7 @@ Vai **Kỹ sư cổng** — Vòng 1: Câu 1.3 (Phiếu A mục A2), Câu 2.1, 2.
 
 ### Phần việc phụ trách
 
-Vai **Sản phẩm và Kinh doanh (TV2)**
+Vai **Sản phẩm và Kinh doanh**
 - **Vòng 1:** 
   - Phiếu A: Câu 1.1 (Mục A1), Câu 1.5 (Mục A3), Câu 1.6 (Mục A4 & A5).
   - Cấu hình & ký: `config/acceptance_criteria.json` và `.lock`.
@@ -94,3 +94,26 @@ Vai **Sản phẩm và Kinh doanh (TV2)**
 
 - **Một điều học được:** Một hệ thống AI trả lời mượt mà và có accuracy cao trong lab vẫn có thể gây thảm họa tài chính và pháp lý ngoài đời thực nếu không có các cổng kiểm soát trần tiền , trần chi phí và cơ chế đối soát chéo với nguồn sự thật.
 - **Một điều còn chưa chắc:** Trong môi trường sản xuất thực tế với hàng nghìn đơn tách nhiều kiện phức tạp, ranh giới giữa việc "tự động hóa để tiết kiệm chi phí" và "chuyển người duyệt để đảm bảo an toàn" cần được cân đối thế nào để không làm vỡ trận hàng chờ của đội ngũ CSKH trong các mùa siêu sale.
+
+## DoTrieuDucPhuong-2A202603843
+
+### Phần việc phụ trách
+
+Vai **Vận hành và Pháp lý** — Vòng 1: Câu 1.2, 1.4 (Phiếu A mục A1, A2), Câu 2.4 (Phiếu B mục B4 HAZOP vòng 1, B5 checklist 9 nhóm việc), Câu 2.10 (B7.5–B7.6 runbook phần 1–3 & giờ cao điểm, mục `operations` và `legal` trong `config/operating_gates.json`). Vòng 2 (thẻ S6): Ghi `Thẻ đã bốc: S6`, Câu 3.1 phần riêng C3.2 & HAZOP thẻ (C4), Câu 3.3 giả định môi trường (C5), Câu 3.7 cập nhật fault tree sau sửa (C9), Risk register (C10), cập nhật checklist & runbook phần 4–5 (C11), điền `submission/submission.json` và chạy `lab10.check_submission --collect`.
+
+### Đóng góp cụ thể
+
+- Thiết kế mục tiêu cho kế toán đối soát & trưởng ca CSKH (`1.2`), telemetry production (`1.4`), HAZOP vòng 1 và checklist 9 nhóm việc có PIC (`2.4`).
+- Đặt cổng `operations` (`pic: NV-TUNG`, `approver_id: NV-HANH`, SLA 60 phút, điều kiện dừng) và `legal` (chặn PII gửi bên thứ ba, yêu cầu `delay_cause`) trong `config/operating_gates.json`, viết runbook phần 1–3 & giờ cao điểm (`2.10`).
+- Vòng 2 (S6): Hoàn thiện C3.2 (Hình dung của người và của hệ thống), HAZOP thẻ (`C4`), giả định môi trường (`3.3`), cập nhật fault tree (`C9`), Risk register (`C10`), checklist & runbook phần 4–5 (`C11`), và gom bài nộp `submission/submission.json`.
+
+### Bằng chứng
+
+- Commits: `44d1d4b` (chốt cổng vòng 1, quyết định v1), `a3f5c95` (nhận thẻ S6), `bdc2020` (cập nhật checklist), `b3c7f12` (nộp vòng 2).
+- Mã lần chạy: `R-S6-grade-20261119-173059-005ba4` (`lab10.check_submission --collect` báo `ĐỦ THÀNH PHẦN`).
+- Phiếu: Phiếu A (A1, A2), Phiếu B (B4, B5, B7.5–B7.6), Phiếu C (C3.2, C4, C5, C9–C11), `submission/submission.json`.
+
+### Exit ticket
+
+- Điều rút ra từ S6: Cổng kiểm nguyên nhân trễ vẫn có thể để lọt lỗi nếu dữ liệu dùng để tính độ trễ và bản ghi quy trách nhiệm thuộc hai kiện khác nhau.
+- Điều cần kiểm chứng: Sau khi chuyển các ca thiếu căn cứ sang người duyệt, một người trực với công suất 6 ca/giờ có giữ được SLA 60 phút trong giờ cao điểm hay không.
