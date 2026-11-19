@@ -13,9 +13,9 @@ Họ tên đầy đủ và MSSV của **mọi** thành viên; bàn 3 người th
 
 | STT | Họ và tên | MSSV | Vai | Trưởng nhóm |
 | --: | --------- | ---- | --- | :---------: |
-|   1 |           |      |     |             |
-|   2 |           |      |     |             |
-|   3 |           |      |     |             |
+|   1 |Nguyễn Duy Mạnh|2A202603806|Kỹ sư cổng|x|
+|   2 |Vũ Xuân Bách|2A202603803|Sản phẩm và Kinh doanh||
+|   3 |Đỗ Triệu Đức Phương|2A202603843|Vận hành và Pháp lý||
 |   4 |           |      |     |             |
 
 Ghi `members` trong `submission/submission.json` theo dạng `"HoVaTen-MSSV"`, khớp bảng trên.
