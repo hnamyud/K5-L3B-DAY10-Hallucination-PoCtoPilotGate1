@@ -43,7 +43,7 @@ Commit sau hạn chót không được tính; team chấm lấy commit cuối c�
 
 ## Checklist
 
-- [ ] Repo của bàn đúng tên `K5-<L3A|L3B>-DAY10-<TenNhom>-PoCtoPilotGate1` và ở chế độ **Public**.
+- [x] Repo của bàn đúng tên `K5-<L3A|L3B>-DAY10-<TenNhom>-PoCtoPilotGate1` và ở chế độ **Public**.
 - [ ] `TEAM.md` có đủ họ tên, MSSV, vai của mọi thành viên và mục `## HoVaTen-MSSV` của từng người.
 - [ ] Tiêu chí đã ký, commit và push **trước** lần đánh giá đầu tiên.
 - [ ] Đã chốt cổng vòng 1 (lệnh 5) trước phút 115.
