@@ -44,12 +44,12 @@ Commit sau hạn chót không được tính; team chấm lấy commit cuối c�
 ## Checklist
 
 - [x] Repo của bàn đúng tên `K5-<L3A|L3B>-DAY10-<TenNhom>-PoCtoPilotGate1` và ở chế độ **Public**.
-- [ ] `TEAM.md` có đủ họ tên, MSSV, vai của mọi thành viên và mục `## HoVaTen-MSSV` của từng người.
+- [x] `TEAM.md` có đủ họ tên, MSSV, vai của mọi thành viên và mục `## HoVaTen-MSSV` của từng người.
 - [x] Tiêu chí đã ký, commit và push **trước** lần đánh giá đầu tiên.
 - [x] Đã chốt cổng vòng 1 (lệnh 5) trước phút 115.
-- [ ] Ba phiếu A, B, C đã điền **mọi mục** (A1–A5, B0–B8, C0–C12); dòng `Thẻ đã bốc:` đúng số thẻ. Lệnh 7 báo tên mục còn nguyên mẫu. Bàn bốc thẻ S4 không cần điền C3.
-- [ ] `submission/submission.json` đủ trường, `members` có MSSV.
-- [ ] Lệnh 7 in `ĐỦ THÀNH PHẦN` trên đúng code và config cuối cùng.
-- [ ] Trên GitHub, thư mục `submission/runs/` có `journal.jsonl`, `grade-report.*` và report ba mốc. Team chấm dùng các file này để kiểm "ký trước khi đo".
-- [ ] Không commit API key, mật khẩu, file `.env`.
-- [ ] **Mỗi thành viên** đã nộp link repo trên LMS trước deadline.
+- [x] Ba phiếu A, B, C đã điền **mọi mục** (A1–A5, B0–B8, C0–C12); dòng `Thẻ đã bốc:` đúng số thẻ. Lệnh 7 báo tên mục còn nguyên mẫu. Bàn bốc thẻ S4 không cần điền C3.
+- [x] `submission/submission.json` đủ trường, `members` có MSSV.
+- [x] Lệnh 7 in `ĐỦ THÀNH PHẦN` trên đúng code và config cuối cùng.
+- [x] Trên GitHub, thư mục `submission/runs/` có `journal.jsonl`, `grade-report.*` và report ba mốc. Team chấm dùng các file này để kiểm "ký trước khi đo".
+- [x] Không commit API key, mật khẩu, file `.env`.
+- [x] **Mỗi thành viên** đã nộp link repo trên LMS trước deadline.
