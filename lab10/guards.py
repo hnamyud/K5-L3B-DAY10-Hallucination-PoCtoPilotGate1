@@ -34,9 +34,42 @@ from .tools import Verdict
 
 
 def pre_guard(ctx):
+    # Cổng 1: Ghim đúng phiên bản chính sách đang có hiệu lực theo ngày hệ thống (as_of)
+    policies = ctx.tools.lookup_policies()
+    eff = H.effective_policy(policies, ctx.as_of)
+    if eff:
+        ctx.log("pin_policy", policy_id=eff["policy_id"])
+        return Verdict.allow(policy_id=eff["policy_id"])
     return Verdict.allow()
 
 
 def write_gate(ctx, action):
     # action = {"tool": "issue_refund", "ticket_id":..., "order_id":..., "amount_vnd":..., "payer":..., ...}
+    tool = action.get("tool")
+    order_id = action.get("order_id")
+    order = ctx.tools.lookup_order(order_id) if order_id else None
+    policy = H.effective_policy(ctx.tools.lookup_policies(), ctx.as_of)
+
+    if tool == "issue_refund" and order and policy:
+        # Cổng 2a: Chặn hoàn tiền trùng (kiểm tra sổ cái thời gian thực)
+        if ctx.tools.ledger_rows(order_id=order_id):
+            ctx.log("block_duplicate_refund", order_id=order_id)
+            return Verdict.deny("đơn đã được hoàn tiền trong sổ cái")
+
+        # Cổng 2b: Đối chiếu số tiền hoàn với tracking DB & chính sách hiệu lực (chặn model_override / fail_open)
+        parcel = H.ticket_parcel(order, ctx.ticket, ctx.as_of)
+        db_delay = H.db_delay_days(parcel, ctx.as_of)
+        expected = H.entitlement_vnd(policy, order, db_delay, parcel.get("delay_cause"))
+        if action.get("amount_vnd", 0) > expected:
+            ctx.log("block_over_refund", asked=action.get("amount_vnd"), expected=expected, db_delay=db_delay)
+            return Verdict.deny("số tiền hoàn vượt mức hợp lệ theo tracking DB")
+
+    if tool == "file_carrier_fault" and order and policy:
+        # Cổng 3: Chặn ghi lỗi oan cho hãng nếu tracking DB không thỏa điều kiện phạt
+        parcel = H.ticket_parcel(order, ctx.ticket, ctx.as_of)
+        db_delay = H.db_delay_days(parcel, ctx.as_of)
+        if not H.carrier_at_fault(policy, parcel, db_delay):
+            ctx.log("block_wrongful_fault", parcel_id=parcel.get("parcel_id"), db_delay=db_delay)
+            return Verdict.deny("không đủ điều kiện ghi lỗi hãng theo tracking DB")
+
     return Verdict.allow()
